@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  vision_api:
+    build: .
+    container_name: vision_yolo_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    
+#    devices:
+#      - /dev/video0:/dev/video0
+#      - /dev/video1:/dev/video1
+#    privileged: true
+    
+    restart: unless-stopped

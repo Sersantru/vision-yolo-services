@@ -1,0 +1,16 @@
+# Entornos virtuales
+venv/
+env/
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# YOLO y Datasets
+runs/
+dataset/capturas/
+dataset/inferencias/
+
+# Jupyter
+.ipynb_checkpoints/
