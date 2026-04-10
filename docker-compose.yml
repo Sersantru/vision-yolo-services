@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   vision_api:
-    build: .
+    build: ./orchestrator-service
     container_name: vision_yolo_app
     ports:
       - "8000:8000"
@@ -15,3 +15,21 @@ services:
 #    privileged: true
     
     restart: unless-stopped
+
+  camera_service:
+    build: ./camera-service
+    container_name: camera_service
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+  inference_service:
+    build: ./inference-service
+    container_name: inference_service
+    ports:
+      - "8002:8002"
+    volumes:
+      - .:/app
+    restart: unless-stopped  
