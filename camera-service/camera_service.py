@@ -29,4 +29,4 @@ def video_webcam(url: str):
     
     cap.release()
 
-    return IMG_PATH
+    return {"status": "success", "message": "Imagen capturada"}

@@ -32,4 +32,8 @@ services:
       - "8002:8002"
     volumes:
       - .:/app
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/video1:/dev/video1
+    privileged: true
     restart: unless-stopped  
