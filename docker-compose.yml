@@ -7,13 +7,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
-    
-#    devices:
-#      - /dev/video0:/dev/video0
-#      - /dev/video1:/dev/video1
-#    privileged: true
-    
+      - ./orchestrator-service:/app
+      
     restart: unless-stopped
 
   camera_service:
@@ -22,18 +17,21 @@ services:
     ports:
       - "8001:8001"
     volumes:
-      - .:/app
-    restart: unless-stopped
-
-  inference_service:
-    build: ./inference-service
-    container_name: inference_service
-    ports:
-      - "8002:8002"
-    volumes:
-      - .:/app
+      - ./camera-service:/app
+      - ./dataset/capturas:/app/dataset/capturas/
     devices:
       - /dev/video0:/dev/video0
       - /dev/video1:/dev/video1
     privileged: true
-    restart: unless-stopped  
+    restart: unless-stopped
+
+  inference_service:
+    #build: ./inference-service
+    image: vision-yolo-services-inference_service:latest
+    container_name: inference_service
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./inference-service:/app
+      - ./dataset:/app/dataset/
+    restart: unless-stopped

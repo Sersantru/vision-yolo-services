@@ -5,19 +5,18 @@ from fastapi.responses import FileResponse
 from pathlib import Path
 
 
-BASE_DIR = Path(__file__).resolve().parent
-IMG_PATH = BASE_DIR / "dataset" / "capturas" / "result.jpg"
+IMG_PATH = Path("/app/dataset/capturas/result.jpg")
 
-app1 = FastAPI()
+app = FastAPI()
 
-@app1.get("/camera")
+@app.get("/camera")
 def video_webcam(url: str):
 
     IMG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    url_camera = url
+    url_camera = int(url) if url.isdigit() else url
+    cap = cv2.VideoCapture(url_camera)
 
-    cap = cv2.VideoCapture(url_camera)  # Open the default camera "0", si no pues metemos la url
     ret, frame = cap.read()
 
     if not ret:

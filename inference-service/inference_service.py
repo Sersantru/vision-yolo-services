@@ -4,11 +4,10 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
-BASE_DIR = Path(__file__).resolve().parent
 
-RESULT_PATH = BASE_DIR / "dataset" / "inferencias" / "result.jpg"
-MODEL_PATH = BASE_DIR / "train" / "weights" / "best.pt"
-IMG_PATH = BASE_DIR / "dataset" / "capturas" / "result.jpg"
+IMG_PATH = Path("/app/dataset/capturas/result.jpg")
+RESULT_PATH = Path("/app/dataset/inferencias/result.jpg")
+MODEL_PATH = Path("/app/train/weights/best.pt")
 
 modelo_entrenado = YOLO(MODEL_PATH)
 
